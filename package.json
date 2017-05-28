@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate",
+  "name": "todoapp",
   "version": "1.0.0",
   "description": "app",
   "main": "server.js",
