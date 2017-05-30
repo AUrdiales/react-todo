@@ -11,6 +11,7 @@ class TodoList extends Component {
             return todos.map((todo) => {
                 return (
                 <Todo key={todo.id} {...todo}/>
+                
                 );
             });
         }
