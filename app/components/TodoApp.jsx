@@ -41,8 +41,8 @@ class TodoApp extends Component{
         var {todos} = this.state;
         return(
             <div className="row">
-                <TodoSearch onSearch={this.handleSearch}/>
                 <div className="column small-centered medium-6 large-4">
+                    <TodoSearch onSearch={this.handleSearch}/>
                     <TodoList todos={todos}/>
                     <AddForm onAddTodo={this.handleAddTodo}/>
                 </div>
