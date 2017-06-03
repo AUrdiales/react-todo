@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import uuid from 'node-uuid';
+
 import TodoList from 'TodoList';
 import AddForm from 'AddForm';
 import TodoSearch from 'TodoSearch';
+import TodoAPI from 'TodoAPI';
 
 class TodoApp extends Component{
     constructor(props) {
@@ -10,27 +12,7 @@ class TodoApp extends Component{
         this.state = 
         {showCompleted: false,
             searchText: '',
-            todos:  [
-            {
-                id: uuid(), 
-                text:'Clean bathroom',
-                completed: false
-            },
-            {   id: uuid(),
-                 text: 'Walk the dog',
-                 completed: true
-                },
-                {
-                id: uuid(),
-                text: 'Learn React!',
-                completed: true
-            },
-            {
-                id: uuid(),
-                text: 'Learn flux!',
-                completed: false
-            }
-                ]
+            todos:  TodoAPI.getTodos()
             };
     }
     handleToggle = (id) => {
@@ -43,6 +25,9 @@ class TodoApp extends Component{
             })
         return todo;
        });
+    }
+    componentDidUpdate = () => {
+        TodoAPI.setTodos(this.state.todos); 
     }
     handleAddTodo = (text) => {
         this.setState({
@@ -63,12 +48,14 @@ class TodoApp extends Component{
         });
     }
     render() {
-        var {todos} = this.state;
+        var {todos, showCompleted, searchText} = this.state;
+        var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+
         return(
             <div className="row">
                 <div className="column small-centered medium-6 large-4">
                     <TodoSearch onSearch={this.handleSearch} />
-                    <TodoList todos={todos} onToggle={this.handleToggle}/>
+                    <TodoList todos={filteredTodos} onToggle={this.handleToggle}/>
                     <AddForm onAddTodo={this.handleAddTodo}/>
                 </div>
             </div>
