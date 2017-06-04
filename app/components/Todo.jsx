@@ -6,6 +6,7 @@ class Todo extends Component {
     render() {
         
         var {id,text, completed, createdAt, completedAt} = this.props;
+        var todoClassname = completed ? 'todo todo-completed' : 'todo';
         var renderDate = () => {
             
           
@@ -20,12 +21,14 @@ class Todo extends Component {
             }
         }
         return (
-            <div onClick={() => {this.props.onToggle(id)}} >
-                <label>
+            <div onClick={() => {this.props.onToggle(id)}} className={todoClassname} >
+                <div>    
                 <input type="checkbox" defaultChecked={completed}/>
-                 <p>{text}</p>
-                  <p>{renderDate()}</p>
-                 </label>
+                </div>
+                <div>
+                    <p>{text}</p>
+                    <p className="todo__subtext">{renderDate()}</p>
+                </div>
             </div>
         )
     }

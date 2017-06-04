@@ -7,6 +7,11 @@ class TodoList extends Component {
     }
     render() {
         var {todos} = this.props;
+        if(todos.length === 0) {
+            return(
+                <p className="container__message">Nothing to do</p>
+            );
+        } else {
         var renderTodos = () => {
             return todos.map((todo) => {
                 return (
@@ -14,6 +19,7 @@ class TodoList extends Component {
                 
                 );
             });
+        }
         }
         return(
             <div>

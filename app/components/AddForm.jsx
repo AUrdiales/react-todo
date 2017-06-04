@@ -16,7 +16,7 @@ class AddForm extends Component {
     }
     render() {
         return(
-            <div>
+            <div className="container__footer">
                 <form ref={ref => {this.form = ref}} onSubmit={this.onSubmit} className="countdown-form">
                     <input ref={ref => {this.input = ref}} type="text" placeholder="Enter a Todo"/>
                     <button className="button expanded">Submit</button>
