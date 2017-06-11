@@ -27,7 +27,8 @@ module.exports = {
     ],
     alias: {
       applicationStyles: __dirname + '/app/styles/app.scss',
-      actions: __dirname + '/app/actions/actions.jsx'
+      actions: __dirname + '/app/actions/actions.jsx',
+      reducers: __dirname + '/app/reducers/reducers.jsx'
     },
     extensions: ['*', '.js', '.jsx']
   },
