@@ -1,7 +1,18 @@
 import React, {Component} from 'react';
 import ReactDOM, {render} from 'react-dom';
 import {BrowserRouter as Router, Route, HashRouter, Link} from 'react-router-dom'
+
 import TodoApp from 'TodoApp';
+import actions from 'actions';
+var store = require('configureStore').configure();
+
+store.subscribe(() => {
+    console.log('New State', store.getState());
+});
+
+store.dispatch(actions.addTodo('Clean the yard'));
+store.dispatch(actions.setSearchText('yard'));
+store.dispatch(actions.toggleShowCompleted());
 
 // Load foundation
 import 'style-loader!css-loader!foundation-sites/dist/foundation.min.css';

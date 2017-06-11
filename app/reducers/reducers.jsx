@@ -5,7 +5,7 @@ import moment from 'moment';
 export function searchTextReducer(state = '', action) {
 
         switch(action.type) {
-            case 'SET_TEXT_SEARCH':
+            case 'SET_SEARCH_TEXT':
             return action.searchText;
             default:
             return state;
@@ -44,7 +44,7 @@ export function todosReducer(state = [], action) {
                 return {
                     ...todo,
                     completed: nextCompleted,
-                    completedAt = nextCompletedAt
+                    completedAt: nextCompletedAt
                 }
             }
         });

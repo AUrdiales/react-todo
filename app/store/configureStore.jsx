@@ -1,0 +1,17 @@
+import {combineReducers,compose, createStore, } from 'redux';
+import {searchTextReducer, showCompletedReducer, todosReducer} from 'reducers';
+
+export function configure() {
+    var reducer = combineReducers({
+    searchText: searchTextReducer,
+    showCompletedReducer: showCompletedReducer,
+    todos: todosReducer
+   
+});
+
+    var store = createStore(reducer, compose(
+        window.devToolsExtension ? window.devToolsExtension() : f => f
+    ));
+
+    return store;
+};
