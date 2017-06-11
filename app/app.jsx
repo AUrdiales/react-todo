@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM, {render} from 'react-dom';
+import {Provider} from 'react-redux';
 import {BrowserRouter as Router, Route, HashRouter, Link} from 'react-router-dom'
 
 import TodoApp from 'TodoApp';
@@ -22,11 +23,13 @@ $(document).foundation();
 import 'style-loader!css-loader!sass-loader!applicationStyles';
 
 ReactDOM.render(
+    <Provider store={store}>
     <HashRouter>
         <div>
             <Route path="/" component={TodoApp}/>
            
          </div>
-    </HashRouter>,
+    </HashRouter>
+    </Provider>,
         document.getElementById('app')
     );
