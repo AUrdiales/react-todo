@@ -9,6 +9,7 @@ class Todo extends Component {
         
         var {id,text, completed, createdAt, completedAt, dispatch} = this.props;
         var todoClassname = completed ? 'todo todo-completed' : 'todo';
+        
         var renderDate = () => {
             
           
@@ -36,4 +37,4 @@ class Todo extends Component {
     }
 }
 
-module.exports = connect()(Todo);
+export default connect()(Todo);

@@ -38,14 +38,16 @@ export function todosReducer(state = [], action) {
         ];
         case 'TOGGLE_TODO':
         return state.map((todo) => {
-            if(todo.id === action.id){
+            if(todo.id == action.id){
                 var nextCompleted = !todo.completed;
-                var nextCompletedAt = nextCompleted ? moment().unix() : undefined;
                 return {
                     ...todo,
                     completed: nextCompleted,
-                    completedAt: nextCompletedAt
+                    completedAt: nextCompleted ? moment().unix() : undefined
                 }
+                
+            } else {
+                return todo;
             }
         });
         

@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import actions from 'actions';
 
 class AddForm extends Component {
     constructor(props){
@@ -6,10 +8,11 @@ class AddForm extends Component {
     }
     onSubmit = (e) => {
         e.preventDefault();
-        let todo = this.input.value;
+        var {dispatch} = this.props;
+        var todo = this.input.value;
         if(todo.length > 0) {
-            this.input.value = '';
-            this.props.onAddTodo(todo);
+            this.input.value = '';  
+            dispatch(actions.addTodo(todo));
         } else {
             this.input.focus();
         }
@@ -27,4 +30,4 @@ class AddForm extends Component {
     }
 }
 
-module.exports = AddForm;
+module.exports = connect()(AddForm);
