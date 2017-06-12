@@ -25,9 +25,17 @@ var toggleTodo = (id) => {
     };
 };
 
+var addTodos = (todos) => {
+    return {
+        type: 'ADD_TODOS',
+        todos
+    }
+}
+
 module.exports = {
     addTodo,
     toggleShowCompleted,
     toggleTodo,
-    setSearchText
+    setSearchText,
+    addTodos
 };

@@ -6,14 +6,16 @@ import {BrowserRouter as Router, Route, HashRouter, Link} from 'react-router-dom
 import TodoApp from 'TodoApp';
 import actions from 'actions';
 var store = require('configureStore').configure();
+import TodoAPI from 'TodoAPI';
 
 store.subscribe(() => {
-    console.log('New State', store.getState());
+    var state = store.getState();
+    console.log('New State', state);
+    TodoAPI.setTodos(state.todos);
 });
 
-store.dispatch(actions.addTodo('Clean the yard'));
-store.dispatch(actions.setSearchText('yard'));
-store.dispatch(actions.toggleShowCompleted());
+var initialTodos = TodoAPI.getTodos();
+store.dispatch(actions.addTodos(initialTodos));
 
 // Load foundation
 import 'style-loader!css-loader!foundation-sites/dist/foundation.min.css';
