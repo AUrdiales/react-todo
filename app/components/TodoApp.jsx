@@ -11,7 +11,7 @@ class TodoApp extends Component{
     constructor(props) {
         super(props)
         this.state = 
-        {showCompleted: false,
+        {   showCompleted: false,
             searchText: '',
             todos:  TodoAPI.getTodos()
             };

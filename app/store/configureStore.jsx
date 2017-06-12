@@ -4,7 +4,7 @@ import {searchTextReducer, showCompletedReducer, todosReducer} from 'reducers';
 export function configure(initialState = {}) {
     var reducer = combineReducers({
     searchText: searchTextReducer,
-    showCompletedReducer: showCompletedReducer,
+    showCompleted: showCompletedReducer,
     todos: todosReducer
    
 });
