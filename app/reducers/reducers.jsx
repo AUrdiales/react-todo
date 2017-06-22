@@ -11,7 +11,6 @@ export function searchTextReducer(state = '', action) {
             return state;
         };
 };
-
 export function showCompletedReducer(state = false, action){
 
     switch(action.type) {
