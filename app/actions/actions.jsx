@@ -1,3 +1,7 @@
+import moment from 'moment';
+
+import { firebase, firebaseRef } from 'app/firebase/index';
+
 var setSearchText = (searchText) => {
     return {
         type: 'SET_SEARCH_TEXT',
@@ -11,17 +15,51 @@ var toggleShowCompleted = () => {
     };
 };
 
-var addTodo = (text) => {
+var addTodo = (todo) => {
     return {
         type: 'ADD_TODO',
-        text
+        todo
     };
-}; 
+};
 
-var toggleTodo = (id) => {
+var updateTodo = (id, updates) => {
     return {
-        type: 'TOGGLE_TODO',
-        id
+        type: 'UPDATE_TODO',
+        id,
+        updates
+    };
+};
+
+var startUpdateTodo = (id, completed) => {
+    return (dispatch, getState) => {
+        var todoRef = firebaseRef.child(`todos/${id}`);
+        var updates = {
+            completed,
+            completedAt: completed ? moment().unix() : null
+        };
+        todoRef.update(updates).then(() => {
+            dispatch(updateTodo(id, updates));
+        });
+    };
+};
+
+
+var startAddTodo = (text) => {
+    return (dispatch, getState) => {
+        var todo = {
+            text,
+            completed: false,
+            createdAt: moment().unix(),
+            completedAt: null
+        };
+        var todoRef = firebaseRef.child('todos').push(todo);
+
+       return todoRef.then(() => {
+            dispatch(addTodo({
+                ...todo,
+                id: todoRef.key
+            }));
+        });
     };
 };
 
@@ -32,10 +70,33 @@ var addTodos = (todos) => {
     }
 }
 
+var startAddTodos = () => {
+    return (dispatch, getState) => {
+        var todosRef = firebaseRef.child('todos');
+
+        todosRef.once('value').then((snapshot) => {
+            var todos = snapshot.val() || {};
+            var parsedTodos = [];
+
+            Object.keys(todos).forEach((todoId) => {
+                parsedTodos.push({
+                    id: todoId,
+                    ...todos[todoId]
+                });
+            });
+            dispatch(addTodos(parsedTodos));
+        });
+        
+    };
+}
+
 module.exports = {
     addTodo,
     toggleShowCompleted,
-    toggleTodo,
+    updateTodo,
+    startUpdateTodo,
     setSearchText,
-    addTodos
+    addTodos,
+    startAddTodos,
+    startAddTodo
 };

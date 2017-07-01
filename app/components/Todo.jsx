@@ -24,7 +24,7 @@ class Todo extends Component {
             }
         }
         return (
-            <div className={todoClassname} onClick={() => {dispatch(actions.toggleTodo(id))}} >
+            <div className={todoClassname} onClick={() => {dispatch(actions.startUpdateTodo(id, !completed))}} >
                 <div>    
                 <input type="checkbox" defaultChecked={completed}/>
                 </div>

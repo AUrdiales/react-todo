@@ -9,7 +9,6 @@ class TodoSearch extends Component {
     
     render() {
         var {dispatch,showCompleted, searchText} = this.props;
-        console.log(showCompleted);
         return(
             <div className="container__header">
                 <div>

@@ -9,7 +9,6 @@ class TodoList extends Component {
     }
     render() {
         var {todos, showCompleted, searchText} = this.props;
-        console.log(showCompleted);
         if(todos.length === 0) {
             return(
                 <p className="container__message">Nothing to do</p>

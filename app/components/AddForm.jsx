@@ -12,7 +12,7 @@ class AddForm extends Component {
         var todo = this.input.value;
         if(todo.length > 0) {
             this.input.value = '';  
-            dispatch(actions.addTodo(todo));
+            dispatch(actions.startAddTodo(todo));
         } else {
             this.input.focus();
         }
