@@ -1,6 +1,7 @@
 import moment from 'moment';
 
-import { firebase, firebaseRef } from 'app/firebase/index';
+import {firebaseRef, githubProvider } from 'app/firebase/index';
+import firebase from 'firebase';
 
 var setSearchText = (searchText) => {
     return {
@@ -88,7 +89,27 @@ var startAddTodos = () => {
         });
         
     };
-}
+};
+
+ var startLogin = () => {
+     return (dispatch, getState) => {
+       return  firebase.auth().signInWithPopup(githubProvider).then((result)=>{
+            console.log('auth Worked',result);
+        }, (e) => {
+            console.log('unable to login',e);
+        });
+     }
+ };
+
+ var startLogout = () => {
+     return (dispatch, getState) => {
+        return firebase.auth().signOut().then(() => {
+            console.log('logOut');
+         }, (e) => {
+            console.log('unable to log out', e);
+         });
+     }
+ }
 
 module.exports = {
     addTodo,
@@ -98,5 +119,7 @@ module.exports = {
     setSearchText,
     addTodos,
     startAddTodos,
-    startAddTodo
+    startAddTodo,
+    startLogin,
+    startLogout
 };

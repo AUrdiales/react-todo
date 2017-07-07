@@ -3,6 +3,7 @@ import ReactDOM, {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {BrowserRouter as Router, Route, HashRouter, Link} from 'react-router-dom'
 
+import Login from 'Login';
 import TodoApp from 'TodoApp';
 import actions from 'actions';
 var store = require('configureStore').configure();
@@ -21,7 +22,8 @@ ReactDOM.render(
     <Provider store={store}>
     <HashRouter>
         <div>
-            <Route path="/" component={TodoApp}/>
+            <Route exact to path="/" component={Login} />
+            <Route path="/todos" component={TodoApp} />
            
          </div>
     </HashRouter>
